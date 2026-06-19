@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dr. Hamid Fazal | Clinical Dashboard</title>
+
+<style>
+:root{
+    --primary:#0b5ed7;
+    --bg:#f7f9fc;
+    --card:#ffffff;
+    --shadow:0 6px 18px rgba(0,0,0,0.08);
+    --muted:#6b7280;
+    --radius:14px;
+}
+
+body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    background:var(--bg);
+    color:#1f2a37;
+}
+
+.container{
+    max-width:1100px;
+    margin:40px auto;
+    padding:0 20px;
+}
+
+/* HERO */
+.hero{
+    background:linear-gradient(135deg,#0b5ed7,#1e3a8a);
+    color:white;
+    padding:40px;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+}
+
+.hero h1{margin:0;font-size:2.1rem;}
+.hero p{opacity:0.9;margin-top:8px;}
+
+/* PROFILE */
+.profile{
+    display:flex;
+    gap:20px;
+    margin-top:20px;
+    background:var(--card);
+    padding:20px;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+}
+
+.profile img{
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    border:3px solid var(--primary);
+    object-fit:cover;
+}
+
+.bio{
+    color:var(--muted);
+    font-size:0.95rem;
+}
+
+/* DASHBOARD STATS */
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:15px;
+    margin-top:25px;
+}
+
+.stat-card{
+    background:var(--card);
+    padding:18px;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    text-align:center;
+}
+
+.stat-number{
+    font-size:2rem;
+    font-weight:700;
+    color:var(--primary);
+}
+
+.stat-label{
+    color:var(--muted);
+    font-size:0.9rem;
+}
+
+/* SEARCH */
+.search-box{
+    margin-top:25px;
+    background:white;
+    padding:14px;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+}
+
+.search-box input{
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:1rem;
+}
+
+/* GRID */
+.section-title{
+    margin-top:40px;
+    border-left:5px solid var(--primary);
+    padding-left:10px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:18px;
+    margin-top:15px;
+}
+
+.card{
+    background:var(--card);
+    padding:18px;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    transition:0.2s;
+}
+
+.card:hover{transform:translateY(-3px);}
+
+.card a{
+    color:var(--primary);
+    font-weight:700;
+    text-decoration:none;
+}
+
+.card p{
+    color:var(--muted);
+    font-size:0.9rem;
+}
+
+/* FOOTER */
+.footer{
+    margin-top:60px;
+    text-align:center;
+    color:var(--muted);
+    font-size:0.9rem;
+    padding:20px;
+    border-top:1px solid #e5e7eb;
+}
+
+.hidden{display:none;}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- HERO -->
+<div class="hero">
+    <h1>Clinical Reasoning & Medical Education Dashboard</h1>
+    <p>Dr. Hamid Fazal — Psychiatry • Neuropsychiatry • Internal Medicine</p>
+</div>
+
+<!-- PROFILE -->
+<div class="profile">
+    <img src="https://i.ibb.co/YFQ2M7Jp/IMG-20230818-WA0013.jpg"/>
+    <div class="bio">
+        <b>Dr. Hamid Fazal</b><br>
+        MBBS, MD, ECFMG Certified, PGD (Nutrition)<br><br>
+        Clinical focus: Psychiatry, Neuropsychiatry, CKD, chronic disease management, and medical education.
+    </div>
+</div>
+
+<!-- DASHBOARD STATS -->
+<div class="stats">
+    <div class="stat-card">
+        <div class="stat-number" id="psychiatryCount">0</div>
+        <div class="stat-label">Psychiatry Cases</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-number" id="neuroCount">0</div>
+        <div class="stat-label">Neuro Cases</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-number" id="endocrineCount">0</div>
+        <div class="stat-label">Endocrine / Metabolic</div>
+    </div>
+</div>
+
+<!-- SEARCH -->
+<div class="search-box">
+    <input type="text" id="searchInput" onkeyup="filterCards()"
+    placeholder="Search PubMed-style: Parkinson, diabetes, schizophrenia, SSRI..." />
+</div>
+
+<!-- CONTENT -->
+<h2 class="section-title">Clinical Knowledge Base</h2>
+
+<div class="grid" id="contentGrid">
+
+    <!-- Endocrine / Metabolic -->
+    <div class="card">
+        <a href="https://hamidfazal.github.io/obesity-meds/">Obesity Pharmacotherapy</a>
+        <p>Anti-obesity pharmacology.</p>
+    </div>
+
+    <div class="card">
+        <a href="https://hamidfazal.github.io/diet/">Diet Guide</a>
+        <p>Clinical nutrition strategies.</p>
+    </div>
+
+    <div class="card">
+        <a href="https://hamidfazal.github.io/protein/">Protein Deficiency Pakistan</a>
+        <p>Public health nutrition.</p>
+    </div>
+
+    <div class="card">
+        <a href="https://hamidfazal.github.io/DM-hrebal/">Diabetes & Herbal Medicine</a>
+        <p>Evidence-based evaluation.</p>
+    </div>
+
+    <!-- Neuro -->
+    <div class="card">
+        <a href="https://hamidfazal.github.io/parkinson-/">Parkinsonism Overview</a>
+        <p>Movement disorder framework.</p>
+    </div>
+
+    <div class="card">
+        <a href="https://hamidfazal.github.io/Parkinson-case/">Parkinson Case</a>
+        <p>Levodopa decision reasoning.</p>
+    </div>
+
+    <!-- Psychiatry -->
+    <div class="card">
+        <a href="https://hamidfazal.github.io/BAD-case/">Bipolar Disorder Case</a>
+        <p>Mood stabilizers & reasoning.</p>
+    </div>
+
+    <div class="card">
+        <a href="https://hamidfazal.github.io/Schizo-case/">Schizophrenia Case</a>
+        <p>Antipsychotic strategy.</p>
+    </div>
+
+    <div class="card">
+        <a href="https://hamidfazal.github.io/GAD-case/">GAD Case</a>
+        <p>Anxiety pharmacology.</p>
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+Clinical Reasoning & Medical Education Series — Dr. Hamid Fazal
+</div>
+
+</div>
+
+<script>
+
+/* SEARCH */
+function filterCards(){
+    let input = document.getElementById("searchInput").value.toLowerCase();
+    let cards = document.querySelectorAll(".card");
+
+    cards.forEach(card=>{
+        let text = card.innerText.toLowerCase();
+        card.style.display = text.includes(input) ? "block" : "none";
+    });
+}
+
+/* DASHBOARD COUNTS */
+function updateStats(){
+    let cards = document.querySelectorAll(".card");
+
+    let psych = 0, neuro = 0, endocrine = 0;
+
+    cards.forEach(card=>{
+        let text = card.innerText.toLowerCase();
+
+        if(text.includes("schizo") || text.includes("bipolar") || text.includes("gad")){
+            psych++;
+        }
+
+        if(text.includes("parkinson")){
+            neuro++;
+        }
+
+        if(
+            text.includes("diabetes") ||
+            text.includes("obesity") ||
+            text.includes("nutrition") ||
+            text.includes("protein") ||
+            text.includes("diet")
+        ){
+            endocrine++;
+        }
+    });
+
+    document.getElementById("psychiatryCount").innerText = psych;
+    document.getElementById("neuroCount").innerText = neuro;
+    document.getElementById("endocrineCount").innerText = endocrine;
+}
+
+updateStats();
+
+</script>
+
+</body>
+</html>
