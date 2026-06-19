@@ -344,6 +344,121 @@ function updateStats(){
 updateStats();
 
 </script>
+/* POPULATE DROPDOWN FROM CARDS */
+function populateSelector(){
+    let select = document.getElementById("postSelector");
+    let cards = document.querySelectorAll(".card");
+
+    cards.forEach((card, index)=>{
+        let title = card.querySelector("a")?.innerText;
+        let desc = card.querySelector("p")?.innerText;
+
+        if(title){
+            let option = document.createElement("option");
+            option.value = index;
+            option.text = title;
+            select.appendChild(option);
+        }
+    });
+}
+
+populateSelector();
+
+/* GENERATE INSTAGRAM POST */
+function generatePost(){
+
+    let select = document.getElementById("postSelector");
+    let index = select.value;
+
+    if(index === ""){
+        alert("Please select a topic first");
+        return;
+    }
+
+    let cards = document.querySelectorAll(".card");
+    let card = cards[index];
+
+    let title = card.querySelector("a").innerText;
+    let desc = card.querySelector("p").innerText;
+
+    let canvas = document.getElementById("igCanvas");
+    let ctx = canvas.getContext("2d");
+
+    /* background */
+    ctx.fillStyle = "#0b5ed7";
+    ctx.fillRect(0,0,1080,1080);
+
+    /* white card */
+    ctx.fillStyle = "white";
+    roundRect(ctx,80,120,920,840,30,true,false);
+
+    /* title */
+    ctx.fillStyle = "#0b5ed7";
+    ctx.font = "bold 52px Arial";
+    wrapText(ctx, title, 140, 250, 820, 60);
+
+    /* subtitle */
+    ctx.fillStyle = "#333";
+    ctx.font = "32px Arial";
+    wrapText(ctx, desc, 140, 420, 820, 45);
+
+    /* footer */
+    ctx.fillStyle = "#6b7280";
+    ctx.font = "28px Arial";
+    ctx.fillText("Dr. Hamid Fazal • Clinical Education Series", 140, 900);
+
+    /* download */
+    let link = document.getElementById("downloadLink");
+    link.style.display = "inline-block";
+    link.innerText = "Download Instagram Post";
+
+    link.onclick = function(){
+        let url = canvas.toDataURL("image/png");
+        let a = document.createElement("a");
+        a.href = url;
+        a.download = title.replaceAll(" ","_") + ".png";
+        a.click();
+    };
+}
+
+/* TEXT WRAP */
+function wrapText(ctx, text, x, y, maxWidth, lineHeight){
+    let words = text.split(" ");
+    let line = "";
+
+    for(let n=0;n<words.length;n++){
+        let testLine = line + words[n] + " ";
+        let metrics = ctx.measureText(testLine);
+        let testWidth = metrics.width;
+
+        if(testWidth > maxWidth && n > 0){
+            ctx.fillText(line, x, y);
+            line = words[n] + " ";
+            y += lineHeight;
+        }
+        else{
+            line = testLine;
+        }
+    }
+    ctx.fillText(line, x, y);
+}
+
+/* ROUNDED RECT */
+function roundRect(ctx,x,y,w,h,r,fill,stroke){
+    ctx.beginPath();
+    ctx.moveTo(x+r,y);
+    ctx.lineTo(x+w-r,y);
+    ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+    ctx.lineTo(x+w,y+h-r);
+    ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+    ctx.lineTo(x+r,y+h);
+    ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+    ctx.lineTo(x,y+r);
+    ctx.quadraticCurveTo(x,y,x+r,y);
+    ctx.closePath();
+    if(fill)ctx.fill();
+    if(stroke)ctx.stroke();
+}
 
 </body>
 </html>
