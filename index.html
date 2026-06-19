@@ -258,6 +258,38 @@ body{
 
 <!-- FOOTER -->
 <div class="footer">
+<!-- INSERT HERE: Instagram Generator -->
+<h2 class="section-title">📲 Instagram Clinical Post Generator</h2>
+
+<div class="card">
+    <p>Select any clinical topic and generate an Instagram-ready educational post.</p>
+
+    <select id="postSelector" style="width:100%;padding:10px;margin-top:10px;border-radius:10px;">
+        <option value="">-- Select Topic --</option>
+    </select>
+
+    <button onclick="generatePost()" style="
+        margin-top:10px;
+        padding:10px 14px;
+        border:none;
+        background:#0b5ed7;
+        color:white;
+        border-radius:10px;
+        cursor:pointer;
+        font-weight:600;
+    ">
+        Generate Instagram Post
+    </button>
+
+    <canvas id="igCanvas" width="1080" height="1080" style="display:none;"></canvas>
+
+    <br>
+    <a id="downloadLink" style="display:none; margin-top:10px; display:inline-block; color:#0b5ed7; font-weight:600;">
+        Download Post
+    </a>
+</div>
+
+    
 Clinical Reasoning & Medical Education Series — Dr. Hamid Fazal
 </div>
 
